@@ -2,6 +2,7 @@ import os
 from dataclasses import dataclass
 from torch import device
 from Xray.constant.training_pipeline import *
+from pathlib import Path
 
 
 @dataclass
@@ -9,9 +10,9 @@ class DataIngestionConfig:
     def __init__(self):
         self.S3_data_folder: str= S3_DATA_FOLDER
         self.bucket_name: str= BUCKET_NAME
-        self.artifact_dir: str= ARTIFACT_DIR+"/"+TIMESTAMP
-        self.data_path: str= self.artifact_dir+"/"+"data_ingestion"+"/"+self.S3_data_folder
-        #os.path.join(self.artifact_dir, "data_ingestion",self.S3_data_folder)
+        self.artifact_dir: str= Path(os.path.join(ARTIFACT_DIR,TIMESTAMP))
+        #self.data_path: str= self.artifact_dir+"/"+"data_ingestion"+"/"+self.S3_data_folder
+        self.data_path: str = Path(os.path.join(self.artifact_dir, "data_ingestion",self.S3_data_folder))
         
         
         self.train_data_path: str= os.path.join(self.data_path, "train")
@@ -81,4 +82,32 @@ class ModelTrainerConfig:
         self.scheduler_params: dict = {"step_size": STEP_SIZE, "gamma": GAMMA}
 
         self.device: device = DEVICE
+        
+        
+@dataclass
+class ModelEvaluationConfig:
+    def __init__(self):
+        self.device: device = DEVICE
+
+        self.test_loss: int = 0
+
+        self.test_accuracy: int = 0
+
+        self.total: int = 0
+
+        self.total_batch: int = 0
+
+        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+        
+        
+@dataclass
+class ModelPusherConfig:
+    def __init__(self):
+        self.bentoml_model_name: str = BENTOML_MODEL_NAME
+
+        self.bentoml_service_name: str = BENTOML_SERVICE_NAME
+
+        self.train_transforms_key: str = TRAIN_TRANSFORMS_KEY
+
+        self.bentoml_ecr_image: str = BENTOML_ECR_URI
         

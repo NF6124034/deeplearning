@@ -67,6 +67,15 @@ GAMMA: int = 0.5
 
 EPOCH: int = 1
 
+BENTOML_MODEL_NAME: str = "xray_model:latest"
+
+BENTOML_SERVICE_NAME: str = "xray_service"
+
+BENTOML_ECR_URI: str = "xray"
+
+PREDICTION_LABEL: dict = {"0": CLASS_LABEL_1, 1: CLASS_LABEL_2}
+
+
 
 
 
