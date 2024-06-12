@@ -22,5 +22,5 @@ setup(
     author = "Jason_Hsu",
     author_email = "NF6124034@gs.ncku.edu.tw",
     packages = find_packages(),
-    install_requires = get_requirements('requirements_dev.txt'),
+    install_requires = get_requirements('requirements.txt'),
 )
