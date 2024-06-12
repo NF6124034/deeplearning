@@ -11,7 +11,10 @@ pandas
 numpy
 seaborn
 torchsummary
-opencv
+# opencv
+boto3
+mypy-boto3-s3
+streamlit 
 
 
 pytest==7.1.3
